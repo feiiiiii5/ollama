@@ -675,6 +675,13 @@ func parseRuneForState(r rune, cs state) (state, rune, error) {
 }
 
 func quote(s string) string {
+	// unquote only returns a value unchanged when it does not start with `"`,
+	// so a value that does needs the triple-quote form, whose delimiters cannot
+	// be confused with the value itself
+	if strings.HasPrefix(s, `"`) {
+		return `"""` + s + `"""`
+	}
+
 	if strings.Contains(s, "\n") || strings.HasPrefix(s, " ") || strings.HasSuffix(s, " ") {
 		if strings.Contains(s, "\"") {
 			return `"""` + s + `"""`

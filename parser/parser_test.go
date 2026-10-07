@@ -721,6 +721,18 @@ MESSAGE assistant Hello, I want to parse all the things!
 FROM foo
 SYSTEM ""
 `,
+		`
+FROM foo
+SYSTEM """"quoted""""
+`,
+		`
+FROM foo
+SYSTEM """""""
+`,
+		`
+FROM foo
+SYSTEM """"quoted system"""
+`,
 	}
 
 	for _, c := range cases {
